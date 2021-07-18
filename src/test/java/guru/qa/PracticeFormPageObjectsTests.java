@@ -1,18 +1,10 @@
 package guru.qa;
 
 import com.codeborne.selenide.Configuration;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import pages.RegistrationPage;
-
-import java.io.File;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
-import static org.graalvm.compiler.nodeinfo.InputType.State;
 
 
 public class PracticeFormPageObjectsTests {
@@ -23,6 +15,16 @@ public class PracticeFormPageObjectsTests {
     String firstName = faker.name().firstName();
     String lastName = faker.name().lastName();
     String email = faker.internet().emailAddress();
+    String gender = "Male";
+    String phone = faker.numerify("##########");
+    String day = "12";
+    String month = "April";
+    String year = "1988";
+    String subjects = "History";
+    String hobbies = "Reading";
+    String currentAddress = faker.address().fullAddress();
+    String state = "NCR";
+    String city = "Noida";
 
     @BeforeAll
     static void setup() {
@@ -34,31 +36,31 @@ public class PracticeFormPageObjectsTests {
     void positiveFillTest(){
         registrationPage.openPage()
                 .typeFirstName(firstName)
-                .typeLastName("Ivanov")
-                .typeEmail("1@ya.ru")
-                .selectGender("Male")
-                .typePhone("9250750048")
-                .setDateOfBirth("12", "April", "1988")
-                .typeSubjects("History")
-                .selectHobbies("Reading")
+                .typeLastName(lastName)
+                .typeEmail(email)
+                .selectGender(gender)
+                .typePhone(phone)
+                .setDateOfBirth(day, month, year)
+                .typeSubjects(subjects)
+                .selectHobbies(hobbies)
                 .uploadPicture()
-                .typeCurrentAddress("My address")
-                .selectState("NCR")
-                .selectCity("Noida")
+                .typeCurrentAddress(currentAddress)
+                .selectState(state)
+                .selectCity(city)
                 .submitPage()
 
-                .checkResultsValue("Ivan")
-                .checkResultsValue("Ivanov")
-                .checkResultsValue("1@ya.ru")
-                .checkResultsValue("Male")
-                .checkResultsValue("9250750048")
-                .checkResultsValue("12 April,1988")
-                .checkResultsValue("History")
-                .checkResultsValue("Reading")
+                .checkResultsValue(firstName)
+                .checkResultsValue(lastName)
+                .checkResultsValue(email)
+                .checkResultsValue(gender)
+                .checkResultsValue(phone)
+                .checkResultsValue(day+ " " +month + "," + year)
+                .checkResultsValue(subjects)
+                .checkResultsValue(hobbies)
                 .checkResultsValue("test.jpg")
-                .checkResultsValue("My address")
-                .checkResultsValue("NCR")
-                .checkResultsValue("Noida");
+                .checkResultsValue(currentAddress)
+                .checkResultsValue(state)
+                .checkResultsValue(city);
     }
 
 }
