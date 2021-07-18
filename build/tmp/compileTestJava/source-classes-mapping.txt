@@ -1,0 +1,6 @@
+pages/RegistrationPage.java
+ pages.RegistrationPage
+components/Calendar.java
+ components.Calendar
+guru/qa/PracticeFormPageObjectsTests.java
+ guru.qa.PracticeFormPageObjectsTests
